@@ -1056,11 +1056,13 @@ class Dropzone extends Em
     # Some browsers do not have the .upload property
     progressObj = xhr.upload ? xhr
     progressObj.onprogress = updateProgress
-
-    headers =
+    
+    headers = unless @options.disableDefaultHeaders
       "Accept": "application/json",
       "Cache-Control": "no-cache",
       "X-Requested-With": "XMLHttpRequest",
+    else
+      {}
 
     extend headers, @options.headers if @options.headers
 
